@@ -16,19 +16,19 @@ def Extremum(dict0):
         jz = 2
     elif (b[-1][0] == '2#'):
         jz = 3
-    b = b[-(jz*6):, 1:]
+    b = b[-(jz * 6):, 1:]
     b = b.astype('float')
     for i in [1, 3, 5]:
         # 1-蜗壳，3-尾水管，5-转速
-        sta = jz*i  # 起始行号
-        end = sta+3  # 终止行号
+        sta = jz * i  # 起始行号
+        end = sta + 3  # 终止行号
         p = list(b[sta:end, 6])  # 取出各机组的极值
         if(i == 3):                 # 获取最大极值
             max_p = min(p)
         else:
             max_p = max(p)
         pos = p.index(max_p)
-        t_p = b[sta+pos, 3]  # 获取对应时间
+        t_p = b[sta + pos, 3]  # 获取对应时间
         list_p = [max_p, t_p, dir2]
         if i == 3:
             item = '尾水位进口最小动水压力'
@@ -120,11 +120,11 @@ def UnitResult(dict0):
         jz = 2
     elif (b[-1][0] == '2#'):
         jz = 3
-    b = b[-(jz*6):, 1:]
+    b = b[-(jz * 6):, 1:]
     b = b.astype('float')
-    d_min=list(range(3*jz,4*jz))
-    d_max = list(range(4*jz, 5*jz))
-    b[d_min+d_max, :] = b[d_max+d_min, : ]
+    d_min = list(range(3 * jz, 4 * jz))
+    d_max = list(range(4 * jz, 5 * jz))
+    b[d_min + d_max, :] = b[d_max + d_min, :]
     # 去除表格多与数据
     # i = 2*jz
     # j = 4*jz
@@ -152,7 +152,7 @@ def UnitResult2excel(dict0,
     for m in listN:
         index += 1
         for i in range(m):
-            n = i+1
+            n = i + 1
             if index == 1:
                 preCondition = 'SJT'
             elif index == 2:
@@ -161,55 +161,55 @@ def UnitResult2excel(dict0,
                 preCondition = 'SJP'
             elif index == 4:
                 preCondition = 'JHP'
-            condition = preCondition+str(n)     # Write condition name
+            condition = preCondition + str(n)     # Write condition name
             data = dict0[condition][0]          # 从字典获取数据
             jz = dict0[condition][1]            # 从字典获取几组数
-            line1 = line+jz*6-1                 # 本次写入最后一行
+            line1 = line + jz * 6 - 1                 # 本次写入最后一行
             ws.write_merge(line, line1, 0, 0, condition)  # 写入第一列工况名
             line2 = line                               # 第二列索引
-            line3 = line2+jz-1
+            line3 = line2 + jz - 1
             ws.write_merge(line2, line3, 1, 1, '球阀上游最大动水压力(m)')
             for k in range(jz):
-                strUnit = str(4+k)+'#'
-                ws.write(line2+k, 2, strUnit)
-            line2 = line3+1                               # 第二列索引
-            line3 = line2+jz-1
+                strUnit = str(4 + k) + '#'
+                ws.write(line2 + k, 2, strUnit)
+            line2 = line3 + 1                               # 第二列索引
+            line3 = line2 + jz - 1
             ws.write_merge(line2, line3, 1, 1, '蜗壳最大动水压力(m)')
             for k in range(jz):
-                strUnit = str(4+k)+'#'
-                ws.write(line2+k, 2, strUnit)
-            line2 = line3+1                               # 第二列索引
-            line3 = line2+jz-1
+                strUnit = str(4 + k) + '#'
+                ws.write(line2 + k, 2, strUnit)
+            line2 = line3 + 1                               # 第二列索引
+            line3 = line2 + jz - 1
             ws.write_merge(line2, line3, 1, 1, '蜗壳最小动水压力(m)')
             for k in range(jz):
-                strUnit = str(4+k)+'#'
-                ws.write(line2+k, 2, strUnit)
-            line2 = line3+1                               # 第二列索引
-            line3 = line2+jz-1
+                strUnit = str(4 + k) + '#'
+                ws.write(line2 + k, 2, strUnit)
+            line2 = line3 + 1                               # 第二列索引
+            line3 = line2 + jz - 1
             ws.write_merge(line2, line3, 1, 1, '尾水管出口最大动水压力 (m)')
             for k in range(jz):
-                strUnit = str(4+k)+'#'
-                ws.write(line2+k, 2, strUnit)
-            line2 = line3+1                               # 第二列索引
-            line3 = line2+jz-1
+                strUnit = str(4 + k) + '#'
+                ws.write(line2 + k, 2, strUnit)
+            line2 = line3 + 1                               # 第二列索引
+            line3 = line2 + jz - 1
             ws.write_merge(line2, line3, 1, 1, '尾水管进口最小动水压力 (m)')
             for k in range(jz):
-                strUnit = str(4+k)+'#'
-                ws.write(line2+k, 2, strUnit)
-            line2 = line3+1                               # 第二列索引
-            line3 = line2+jz-1
+                strUnit = str(4 + k) + '#'
+                ws.write(line2 + k, 2, strUnit)
+            line2 = line3 + 1                               # 第二列索引
+            line3 = line2 + jz - 1
             ws.write_merge(line2, line3, 1, 1, '机组最大转速 (rpm)')
             for k in range(jz):
-                strUnit = str(4+k)+'#'
-                ws.write(line2+k, 2, strUnit)
+                strUnit = str(4 + k) + '#'
+                ws.write(line2 + k, 2, strUnit)
             for j in range(7):
-                for k in range(jz*6):
-                    row = line+k
-                    if j+1 in listCol:
-                        ws.write(row, j+3, data[k, j], style)
+                for k in range(jz * 6):
+                    row = line + k
+                    if j + 1 in listCol:
+                        ws.write(row, j + 3, data[k, j], style)
                     else:
-                        ws.write(row, j+3, data[k, j])
-            line = line1+1
+                        ws.write(row, j + 3, data[k, j])
+            line = line1 + 1
 
     wb.save(path + '/' + filename)
 
@@ -245,7 +245,7 @@ def SteadyFlow(dict0, jz):
                       skip_header=1,
                       max_rows=jz,
                       usecols=range(1, 5))
-    a[:, 0] = a[:, 0]*100
+    a[:, 0] = a[:, 0] * 100
     dict0[dir2] = [a, jz]
 
 
@@ -264,7 +264,7 @@ def SteadyFlow2Excek(dict0,
     for m in listN:
         index += 1
         for i in range(m):
-            n = i+1
+            n = i + 1
             if index == 1:
                 preCondition = 'SJT'
             elif index == 2:
@@ -273,20 +273,20 @@ def SteadyFlow2Excek(dict0,
                 preCondition = 'SJP'
             elif index == 4:
                 preCondition = 'JHP'
-            condition = preCondition+str(n)     # Write condition name
+            condition = preCondition + str(n)     # Write condition name
             data = dict0[condition][0]          # 从字典获取数据
             jz = dict0[condition][1]            # 从字典获取几组数
-            line1 = line+2                   # 本次写入最后一行
+            line1 = line + 2                   # 本次写入最后一行
             ws.write_merge(line, line1, 0, 0, condition)    # 写入第一列工况名
             for k in range(3):
-                if k > jz-1:
+                if k > jz - 1:
                     continue
-                row = line+k
-                strUnit = str(4+k)+'#'
+                row = line + k
+                strUnit = str(4 + k) + '#'
                 ws.write(row, 1, strUnit)
                 for j in range(4):
-                    ws.write(row, j+2, data[k, j], style)
-            line = line1+1
+                    ws.write(row, j + 2, data[k, j], style)
+            line = line1 + 1
 
     wb.save(path + '/' + filename)
 
@@ -295,13 +295,13 @@ def GateTank(dict_1, dict_2, dict_3, dict_4, jz):
     # 读取极值结果文件，由于调压室为4，数据读取位置固定
     a = np.genfromtxt('恒定流结果文件.txt',
                       delimiter="\t",
-                      skip_header=jz+2,
+                      skip_header=jz + 2,
                       max_rows=st,
                       usecols=range(1, 2))
 
     b = np.genfromtxt('极值结果文件.txt',
                       delimiter="\t",
-                      skip_header=jz+2,
+                      skip_header=jz + 2,
                       max_rows=st,
                       usecols=range(1, 9))
 
@@ -314,7 +314,7 @@ def GateTank(dict_1, dict_2, dict_3, dict_4, jz):
 def GateTank2Excel(dict_1, dict_2, dict_3, dict_4):
     df_1 = pd.DataFrame(dict_1)
     df_1 = df_1.T
-    writer1 = pd.ExcelWriter(prepath+'\上闸.xlsx')					# 写入Excel文件
+    writer1 = pd.ExcelWriter(prepath + '\上闸.xlsx')					# 写入Excel文件
     # ‘page_1’是写入excel的sheet名
     df_1.to_excel(writer1, 'page_1', float_format='%.2f')
     writer1.save()
@@ -322,7 +322,7 @@ def GateTank2Excel(dict_1, dict_2, dict_3, dict_4):
 
     df_2 = pd.DataFrame(dict_2)
     df_2 = df_2.T
-    writer2 = pd.ExcelWriter(prepath+'\上调.xlsx')					# 写入Excel文件
+    writer2 = pd.ExcelWriter(prepath + '\上调.xlsx')					# 写入Excel文件
     # ‘page_2’是写入excel的sheet名
     df_2.to_excel(writer2, 'page_2', float_format='%.2f')
     writer2.save()
@@ -330,7 +330,7 @@ def GateTank2Excel(dict_1, dict_2, dict_3, dict_4):
 
     df_3 = pd.DataFrame(dict_3)
     df_3 = df_3.T
-    writer3 = pd.ExcelWriter(prepath+'\下调.xlsx')					# 写入Excel文件
+    writer3 = pd.ExcelWriter(prepath + '\下调.xlsx')					# 写入Excel文件
     # ‘page_3’是写入excel的sheet名
     df_3.to_excel(writer3, 'page_3', float_format='%.2f')
     writer3.save()
@@ -338,11 +338,14 @@ def GateTank2Excel(dict_1, dict_2, dict_3, dict_4):
 
     df_4 = pd.DataFrame(dict_4)
     df_4 = df_4.T
-    writer4 = pd.ExcelWriter(prepath+'\下闸.xlsx')					# 写入Excel文件
+    writer4 = pd.ExcelWriter(prepath + '\下闸.xlsx')					# 写入Excel文件
     # ‘page_4’是写入excel的sheet名
     df_4.to_excel(writer4, 'page_4', float_format='%.2f')
     writer4.save()
     writer4.close()
+
+
+
 
 
 if __name__ == '__main__':
@@ -351,6 +354,7 @@ if __name__ == '__main__':
     st = 4  # 调压室个数
     dict1 = {'name': '设计工况'}
     dict2 = {'name': '校核工况'}
+
 
     dict_s = {}
     dict3 = {}
@@ -364,19 +368,20 @@ if __name__ == '__main__':
     p3 = 0  # 下调
     p4 = 2  # 下闸
     listN = [8, 16, 6, 6]  # 工况数列表
-    jzName = [4, 10, 14]
+    jzName = [ 10, 18]
     # index_list = [
     #     '蜗壳末端最大动水压力', '尾水管最小压力', '转速最大上升率', '上游调压室最高涌浪', '上游调压室最低涌浪', '上闸最高涌浪',
     #     '上闸最低涌浪', '尾水调压室最高涌浪', '尾水调压室最低涌浪', '下闸最高涌浪', '下闸最低涌浪'
     # ]
 
     # 计算文件夹路径
-    prepath = r'C:\Users\ZW\Documents\Tencent Files\1002070296\FileRecv\MobileFile\钢衬方案比选方案2019-08-09\3m4.6m(改中平洞和引支长度)'
+    prepath = r'E:\DeskFile\项目\玉门\方案一'
     dir_list = prepath.split('\\')
-    lenth = len(dir_list)+1  # 根目录长度
+    lenth = len(dir_list) + 1  # 根目录长度
     # tpFolder = os.listdir(prepath)  # 水轮机、水泵工况文件夹名称列表
     for root1, dirs1, files1 in os.walk(prepath):   # 遍历水轮机、水泵工况文件夹
         dir_list = root1.split('\\')  # 目录分段
+        
         if('启动' in dir_list or '先甩' in dir_list):
             continue
         if (('水轮机设计工况'in dir_list) or ('水泵设计工况' in dir_list)):
@@ -385,7 +390,9 @@ if __name__ == '__main__':
             dict_s = dict2
         else:
             continue
-        if files1:
+        print(dir_list[-2][-2:])
+        if files1 and dir_list[-2][-1:-3]=='工况' :
+        
             dir2 = dir_list[lenth].split('（')[0]
             os.chdir(root1)
             Extremum(dict_s)
