@@ -1,7 +1,5 @@
 import pandas as pd
 
-d=list(range(3,5))
-c=[1,2]
-a=[d+c]
-print(a)
+d= {'水轮机设计工况': 'TDT', '水泵设计工况': 'PDP', '水轮机校核工况': 'TCT', '水泵校核工况': 'PCP'}
+print(d[0])
 
